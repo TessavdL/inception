@@ -1,0 +1,37 @@
+# CMD ["nginx", "-g", "daemon off;"]
+
+# nginx daemon off runs nginx in the foreground
+
+# the default nginx daemon on will start nginx in the background
+# this way nginx and other services are running and talking to each other
+# one server runs many services
+
+# with docker one container has only once service
+
+# the initial process spawns a master nginx process and some workers and then immediately quits
+# docker only watches the pid of the original command and therefore the container halts
+
+# by turning off the daemon we keep the container running
+
+# docker system prune -a
+# cleans up any unused resources (images, volumes, containers) and networks
+
+# docker ps
+# shows all running containers
+
+# docker images
+# shows all images
+
+# docker build -t "name_of_image" .
+
+# docker run -it --name "name" -p 80:80 "name_of_image" bash
+# will run the container in interactive mode so you can interact with it
+
+# while the container is running you can use
+# docker cp "name_of_container":"path_from_root_of_container" "path_host"
+# to copy
+
+# -rm removes container after it's done running
+
+# to check if TSL 1.3 is enabled
+# openssl s_client -connect localhost:443 -tls1_3
