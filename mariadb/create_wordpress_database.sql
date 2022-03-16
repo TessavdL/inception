@@ -1,0 +1,4 @@
+CREATE DATABASE wordpress_db;
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'root'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EXIT

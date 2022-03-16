@@ -35,3 +35,8 @@
 
 # to check if TSL 1.3 is enabled
 # openssl s_client -connect localhost:443 -tls1_3
+
+//////
+
+# secure mysql installation
+# https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
