@@ -41,23 +41,9 @@
 # secure mysql installation
 # https://stackoverflow.com/questions/24270733/automate-mysql-secure-installation-with-echo-command-via-a-shell-script
 
-UPDATE mysql.user SET plugin = 'mysql_native_password', Password = PASSWORD('NEWPASSWORD') WHERE User = 'root';
-mysql socket causes mariadb to ignore password
-https://askubuntu.com/questions/766334/cant-login-as-mysql-user-root-from-normal-user-account-in-ubuntu-16-04
-
-mysql -e "CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED WITH auth_socket;"
-mysql -e "CREATE USER 'root'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY '@DB_PASSWORD_ROOT';"
-mysql -e "CREATE USER 'root'@'::1' IDENTIFIED WITH mysql_native_password BY '@DB_PASSWORD_ROOT';"
-
-https://stackoverflow.com/questions/41846000/enable-password-and-unix-socket-authentication-for-mariadb-root-user
-
-# COPY mysql_secure_installation.sql .
-# ENV MARIADB_ROOT_PASSWORD=f3J9Qnb67hM0ff
-# RUN sed -i 's@'\(\'root\'\)'@'\(\'"$MARIADB_ROOT_PASSWORD"\'\)'@g' mysql_secure_installation.sql
-# RUN sed -i 's@MARIADB_ROOT_PASSWORD@"${MARIADB_ROOT_PASSWORD}"@g' mysql_secure_installation.sql
-# RUN service mysql start && mysql -sf --user=root < mysql_secure_installation.sql
-
-# select host, user, password, plugin from mysql.user;
-
-mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('123');FLUSH PRIVILEGES;" 
- printf "123\n n\n n\n n\n y\n y\n y\n" | mysql_secure_installation
+SELECT host,
+       user as username,
+       password,
+       password_expired
+FROM mysql.user
+ORDER BY user;
