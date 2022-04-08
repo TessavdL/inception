@@ -47,3 +47,16 @@ SELECT host,
        password_expired
 FROM mysql.user
 ORDER BY user;
+
+docker compose up -d --no-deps --build wordpress
+rebuilds one container
+
+CREATE USER IF NOT EXISTS 'superuser'@'%' IDENTIFIED BY 'coffee';
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'superuser'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+is necessary if you want wordpress to be able to "talk" with the mariadb server,
+does not work with localhost, you need the extra user on % (meaning any IP address, which is not ideal but okay I guess?)
+https://stackoverflow.com/questions/1559955/host-xxx-xx-xxx-xxx-is-not-allowed-to-connect-to-this-mysql-server
+
+ENV_WORDPRESS_DB_HOST="mariadb:3306"
+replace mariadb for the name of the service of the database (can be db)
